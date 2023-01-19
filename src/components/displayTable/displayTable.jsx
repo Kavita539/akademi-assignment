@@ -11,7 +11,7 @@ import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Pagination from '@mui/material/Pagination';
 import { Typography } from '@mui/material';
-import { Stack } from '@mui/system';
+import Stack from '@mui/material/Stack';
 
 function createData(
   name,
@@ -70,11 +70,12 @@ export default function BasicTable() {
             </TableRow>
           ))}
         </TableBody>
-        {/* <Stack direction='row' spacingRight={20} sx={{display: 'flex',justifyContent: 'space-between', alignItems: 'center', gap:'2rem'}}>
-        <Typography>Showing 1-5 from 100 data</Typography>
-        <Pagination count={3} variant="outlined" color="primary" sx={{marginLeft: 'auto'}}/>
-        </Stack> */}
+        
       </Table>
+      <Stack sx={{display: 'flex', justifyContent: 'space-between', flexDirection: 'row', gap:'30rem', alignItems: 'center', margin:'2rem 0'}}>
+    <Typography sx={{fontSize:'12px'}}>Showing 1-5 from 100 data</Typography>
+    <Pagination count={3} variant="outlined" />
+    </Stack>
     </TableContainer>
   );
 }
