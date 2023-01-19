@@ -93,24 +93,35 @@ export default function PersistentDrawerLeft() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} sx={{bgcolor: 'transparent', boxShadow: 'none'}}>
+
+
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Students
-          </Typography>
-          <Badge color="secondary" variant="dot" invisible={invisible}>
-              <NotificationsActiveOutlinedIcon/>
-          </Badge>
-          <SettingsOutlinedIcon/>
+            <Stack direction="row" sx={{display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center'}}>
+              <IconButton color="#311b92" aria-label="open drawer" onClick={handleDrawerOpen} edge="start"
+                sx={{ mr: 2, ...(open && { display: 'none' }) }}>
+                <MenuIcon />
+              </IconButton>
+
+              <Typography variant="h5" noWrap component="div" sx={{color: '#311b92', fontWeight: '600'}}>
+                Students
+              </Typography>
+            </Stack>
+
+            <Stack direction="row" sx={{display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center', marginLeft:'auto'}}>
+              <Badge color="secondary" variant="dot" invisible={invisible}>
+                <NotificationsActiveOutlinedIcon
+                  sx={{color: '#b0bec5', bgcolor: '#fff', borderRadius: '50%', padding: '8px', fontSize:'2.5rem'}} />
+              </Badge>
+              <SettingsOutlinedIcon
+                sx={{color: '#b0bec5', bgcolor: '#fff', borderRadius: '50%', padding: '8px',fontSize:'2.5rem'}} />
+              <Stack direction='column'>
+                <Typography sx={{color: '#311b92', fontSize:'12px'}}>Nabila A.</Typography>
+                <Typography sx={{color: '#311b92', fontSize:'12px', textAlign: 'right'}}>Admin</Typography>
+              </Stack>
+              <Avatar>N</Avatar>
+            </Stack>
+          
         </Toolbar>
       </AppBar>
       <Drawer
@@ -120,6 +131,9 @@ export default function PersistentDrawerLeft() {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
+            bgcolor: '#5e35b1',
+            zIndex: '20',
+            color: '#ede7f6'
           },
         }}
         variant="persistent"
@@ -128,23 +142,23 @@ export default function PersistentDrawerLeft() {
       >
         <DrawerHeader>
           <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
-          <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
-            <Avatar sx={{borderRadius: '5px'}}>H</Avatar>
-            <Typography variant="h5">
+          <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
+            <Avatar sx={{borderRadius: '12px', background: '#ff5722', fontWeight: '600'}}>A</Avatar>
+            <Typography variant="h5" sx={{fontWeight: '600', color: 'white'}}>
               Akademi
             </Typography>
           </Stack>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={handleDrawerClose} sx={{color: '#ede7f6'}}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
           </Stack>
         </DrawerHeader>
         
-        <List sx={{margin:'1rem'}}>
+        <List sx={{margin:'1rem', bgcolor: '#5e35b1'}}>
           {['Dashboard', 'Students', 'Teacher', 'Event', 'Finance', 'Food', 'User', 'Chat', 'Latest Activity'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
-                <ListItemIcon>
+                <ListItemIcon sx={{color:'#ede7f6'}}>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
@@ -161,9 +175,9 @@ export default function PersistentDrawerLeft() {
         </Stack>
         
       </Drawer>
-      <Main open={open}>
+      <Main open={open} sx={{bgcolor: '#eceff1'}}>
         <DrawerHeader />
-        <Stack direction="row">
+        <Stack direction="row" sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin:'2rem 0'}}>
           <CustomizedInputBase/>
           <IconLabelButtons/>
         </Stack>
