@@ -7,7 +7,6 @@ import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -18,6 +17,14 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import BasicTable from '../displayTable/displayTable';
+import Badge from '@mui/material/Badge';
+import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import CustomizedInputBase from '../searchBar/searchBar';
+import IconLabelButtons from '../iconLabelBtns/iconLabelButtons';
 
 const drawerWidth = 240;
 
@@ -69,6 +76,11 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [invisible, setInvisible] = React.useState(false);
+
+  const handleBadgeVisibility = () => {
+    setInvisible(!invisible);
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -93,8 +105,12 @@ export default function PersistentDrawerLeft() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Persistent drawer
+            Students
           </Typography>
+          <Badge color="secondary" variant="dot" invisible={invisible}>
+              <NotificationsActiveOutlinedIcon/>
+          </Badge>
+          <SettingsOutlinedIcon/>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -111,13 +127,21 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader>
+          <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
+          <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
+            <Avatar sx={{borderRadius: '5px'}}>H</Avatar>
+            <Typography variant="h5">
+              Akademi
+            </Typography>
+          </Stack>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
+          </Stack>
         </DrawerHeader>
-        <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        
+        <List sx={{margin:'1rem'}}>
+          {['Dashboard', 'Students', 'Teacher', 'Event', 'Finance', 'Food', 'User', 'Chat', 'Latest Activity'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
@@ -128,49 +152,22 @@ export default function PersistentDrawerLeft() {
             </ListItem>
           ))}
         </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+
+        <Stack direction="row" spacing={2}>
+        <Typography  sx={{fontSize: '12px', display: "flex", justifyContent:"center", alignItems:"center", margin:"8px"}}>
+          Akademi-School Admission Dashboard
+          Made with by An Vu
+        </Typography>
+        </Stack>
+        
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-          enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-          Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-          Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-          nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-          leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-          feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-          consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-          sapien faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        <Stack direction="row">
+          <CustomizedInputBase/>
+          <IconLabelButtons/>
+        </Stack>
+        <BasicTable/>
       </Main>
     </Box>
   );
